@@ -85,7 +85,6 @@ import { ref, onMounted, computed, toRaw } from 'vue';
 import axios from 'axios';
 import { shallowRef } from 'vue';
 import CpLocalFooter from '@/components/CpLocalFooter.vue';
-import CpOptionsTest from '@/components/CpOptionsTest.vue';
 
 const toolbarTitle = ref("App.vue'dan Beslenen Toolbar Başlığı");
 const inputDatas = ref({})
