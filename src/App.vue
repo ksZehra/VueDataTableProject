@@ -115,26 +115,25 @@ const headers = ref([
   { title: 'Görüntüle', key: 'view', align: 'center', sortable: false },
 ])
 
-function loadItems(options) {
+async function loadItems(options) {
   loading.value = true;
   const { page, itemsPerPage } = options;
   const skip = (page - 1) * itemsPerPage;
   const rawSortBy = toRaw(options.sortBy);
   const sort = rawSortBy.length ? rawSortBy[0] : null;
 
-  GetPagingService(itemsPerPage, skip, sort).then(({ items, total }) => {
-    serverItems.value = items;
-    totalItems.value = total;
-    loading.value = false;
+  const { diziKayitlar, total } = await GetPagingService(itemsPerPage, skip, sort)
+  serverItems.value = diziKayitlar;
+  totalItems.value = total;
+  loading.value = false;
 
-    // Mevcut sayfa numarasını güncelle
-    currentPage.value = page;
-    // Toplam öğe sayısını güncelle
-    totalItems.value = total;
-  });
+  // Mevcut sayfa numarasını güncelle
+  currentPage.value = page;
+  // Toplam öğe sayısını güncelle
+  totalItems.value = total;
 }
 
-const GetPagingService = (limit, skip, sort = null) => {
+const GetPagingService = async (limit, skip, sort = null) => {
   const params = { limit, skip };
 
   if (sort) {
@@ -142,15 +141,14 @@ const GetPagingService = (limit, skip, sort = null) => {
     params.sortDirection = sort.order;
   }
 
-  return axios.get('https://localhost:44322/api/ZK/Paging', { params })
-    .then(response => {
-      const { diziKayitlar, total } = response.data;
-      return { items: diziKayitlar, total };
-    })
-    .catch(error => {
-      console.error('Get Hata Mesajı:', error);
-      return { items: [], total: 0 };
-    });
+  try {
+    const res = await axios.get('https://localhost:44322/api/ZK/Paging', { params })
+    return res.data
+  } catch (error) {
+    console.error('Get Hata Mesajı:', error);
+    return { items: [], total: 0 };
+  }
+
 };
 
 const ViewItem = (id, isVisibleButton) => {
