@@ -1,3 +1,11 @@
+* VUE.JS (VUE) DATATABLE PROJESİ:
+- İnsert, update, delete ve view işlemlerinin yapıldığı basit bir datatable projesi.
+- Ekle butonuyla açılan modal'dan girilen veriler db'ye eklenecek ve datatable'da görünecektir.
+- Datatable'da satır bazında her kayıt için güncelleme, silme ve görüntüleme işlemi yapılabilecektir.
+- Datatable'da kolonlar için sorting yapılabilmektedir. MultiSort işlemi bulunmamaktadır sadece tek bir kolon için sorting yapmaktadır.
+- Proje içerisinde birkaç ufak komponent oluşturulup test amaçlı kullanılmıştır.
+
+
 # Vuetify (Default)
 
 This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
